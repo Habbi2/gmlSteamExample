@@ -1,7 +1,8 @@
 // Draw player fills:
 //draw_set_color(c_white);
 //with (oPlayer) draw_self();
-with (obj_cursor) draw_sprite_ext(Player,0,x,y,image_xscale,image_yscale,0,c_blue,1);
+with (obj_cursor) draw_sprite_ext(sPlayer,0,x,y,image_xscale,image_yscale,0,c_blue,1);
+with (obj_shotgun) draw_sprite_ext(sShotgun,0,x,y,image_xscale,image_yscale,image_angle,image_blend,1);
 
 // Draw names above players:
 draw_set_color(c_white);

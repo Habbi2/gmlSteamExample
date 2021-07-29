@@ -27,11 +27,6 @@ function packet_init() {
 	    // Displayed cursor change
 	    cursor,
 		weapon,
-		bullet,
-		player2,
-		obstacle,
-		controller,
-		explosion,
-		crate,
+		bullet
 	}
 }

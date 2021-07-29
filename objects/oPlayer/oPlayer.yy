@@ -1,11 +1,11 @@
 {
-  "spriteId": {
-    "name": "Player",
-    "path": "sprites/Player/Player.yy",
-  },
+  "spriteId": null,
   "solid": false,
   "visible": true,
-  "spriteMaskId": null,
+  "spriteMaskId": {
+    "name": "sPlayer",
+    "path": "sprites/sPlayer/sPlayer.yy",
+  },
   "persistent": false,
   "parentObjectId": {
     "name": "obj_cursor",

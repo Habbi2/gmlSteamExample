@@ -2,11 +2,14 @@ players = ds_map_create();
 var users = obj_steam.net_list;
 
 //instance_create(x, y, oController);
-var p = instance_create(0+sprite_get_width(Player)/2,room_height/2-sprite_get_width(Block)*3, oPlayer);
+var p = instance_create(room_width/2,room_height/2, oPlayer);
 with (p){
     user = obj_steam.user;
 	with (obj_game) {
 		ds_map_add(players,obj_steam.user ,obj_steam.user);
+	}
+	with (instance_create_layer(x,y, "Weapons" ,oShotgun)){
+		user = obj_steam.user;	
 	}
 }
 
@@ -14,6 +17,9 @@ var n = ds_list_size(users);
 for (var i = 0; i < n; i++) {
 	with (instance_create_layer(x, y, "Player", obj_cursor)) {
 	    user = users[|i];
+	}
+	with (instance_create_layer(x, y, "Weapons", obj_shotgun)){
+		user = users[|i];	
 	}
 }
 

@@ -47,82 +47,36 @@ function packet_handle_client(argument0) {
 	            y = _y;
 	        }
 	        break;
-		case packet_t.weapon:
-			//update the client side shotgun instance:
-			var _steam_id = buffer_read_int64(b);
-			var _w = buffer_read(b, buffer_s16);
-			var _sh = buffer_read(b, buffer_bool);
+	    case packet_t.weapon:
+	        // update the client-side player instance:
+			var steam_id = buffer_read_int64(b);
 			var _x = buffer_read(b, buffer_f32);
 	        var _y = buffer_read(b, buffer_f32);
-	        var _d = buffer_read(b, buffer_s16);
-			var _ys = buffer_read(b, buffer_s16);
-	        var _ia = buffer_read(b, buffer_s16);
-	        with (oWeapon) if (user == _steam_id){
-				weapon = _w;
-				if (_sh) shoot = true; else shoot = false;
+			var _ia = buffer_read(b, buffer_f32);
+	        var _iy = buffer_read(b, buffer_f32);
+	        var _d = buffer_read(b, buffer_f32);
+	        with (obj_shotgun) if (user == steam_id) {
 	            x = _x;
 	            y = _y;
-				direction = _d;
-				image_yscale = _ys;
 				image_angle = _ia;
+				image_yscale = _iy;
+				direction = _d;
 	        }
 	        break;
-		case packet_t.bullet:
-			//buffer_write(p, buffer_s16, id);
-			//buffer_write(p, buffer_f32, speed);
-			//buffer_write(p, buffer_f32, direction);
-			//buffer_write(p, buffer_f32, image_angle);
-			//buffer_write(p, buffer_f32, image_yscale);
-			var _id = buffer_read(b, buffer_s16);
-			var _b = buffer_read(b, buffer_s16);
+	    case packet_t.bullet:
+	        // update the client-side player instance:
+			var _x = buffer_read(b, buffer_f32);
+	        var _y = buffer_read(b, buffer_f32);
 			var _s = buffer_read(b, buffer_f32);
 	        var _d = buffer_read(b, buffer_f32);
-	        var _ia = buffer_read(b, buffer_s16);
-			with (oBullet) if (pid == _id){
-				bullet = _b;
-				selectbullet2(_b)
+	        var _ia = buffer_read(b, buffer_f32);
+	        var _iy = buffer_read(b, buffer_f32);
+		    with (instance_create(_x,_y,oBullet)){
 				speed = _s;
 				direction = _d;
 				image_angle = _ia;
+				image_yscale = _iy;
 			}
-			break;
-		case packet_t.controller:
-			var _b = buffer_read(b, buffer_s16);
-			var _id = buffer_read(b, buffer_s16);
-			with (oController){
-				repeat (_b) {
-					var block = instance_create(0,0,oObstacle)
-					with (block) {
-						pid = _id;
-					}
-					with instance_create(x,y,o_local_obstacle){
-						x = block.x;
-						y = block.y;
-					}
-				}
-			}
-			break;
-		case packet_t.obstacle:
-	        // update the client-side player instance:
-			var _id = buffer_read(b, buffer_s16);
-	        var _x = buffer_read(b, buffer_f32);
-	        var _y = buffer_read(b, buffer_f32);
-	        var _vs = buffer_read(b, buffer_s16);
-	        var _hs = buffer_read(b, buffer_s16);
-			var _rot = buffer_read(b, buffer_s16);
-	        with (oObstacle) if (pid == _id){
-				x = _x;
-				y = _y;
-				vspeed = _vs;
-				hspeed = _hs;
-				image_angle = _rot;
-	        }
-	        break;
-		case packet_t.explosion:
-	        // update the client-side player instance:
-	        var _x = buffer_read(b, buffer_f32);
-	        var _y = buffer_read(b, buffer_f32);
-	        instance_create(_x,_y,oExplosion);
 	        break;
 	}		
 }

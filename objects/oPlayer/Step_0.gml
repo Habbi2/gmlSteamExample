@@ -8,13 +8,11 @@ if (grounded) {
 	doubleJump = 1;
 	hspd = approach(hspd, movement, acceleration);
 	if (keyJump){
-	vspd -= jForce;	
 	}
 } else {
 	hspd = approach(hspd, movement, airAcceleration);
 	vspd += grav;
 	if (doubleJump > 0 && keyJump){
-		vspd = -jForce;
 		doubleJump--;
 	}
 }
@@ -36,6 +34,7 @@ if (place_meeting(x, y + vspd, oBlock)) {
 y += vspd;
 
 var p = packet_start(packet_t.cursor);
+if (obj_steam.lobby_is_owner) buffer_write_int64(p, user);
 buffer_write(p, buffer_f32, x);
 buffer_write(p, buffer_f32, y);
 packet_send_all(p);
